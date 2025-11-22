@@ -33,3 +33,14 @@ plugins {
 }
 
 include(":composeApp")
+include(":core:icon")
+include(":data:websocket")
+include(":feature:edge:api")
+include(":feature:overview:api")
+include(":feature:overview:di")
+include(":feature:overview:impl")
+include(":feature:user:api")
+include(":feature:user:di")
+include(":feature:user:impl")
+include(":navigation")
+

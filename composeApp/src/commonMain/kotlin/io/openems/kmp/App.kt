@@ -9,16 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.websocket.WebSockets
-import io.ktor.client.plugins.websocket.webSocket
-import io.ktor.client.plugins.websocket.wss
-import io.ktor.websocket.Frame
-import io.ktor.websocket.readText
-import io.openems.kmp.authenticate.authenticateNav
-import io.openems.kmp.demo.demoNav
-import io.openems.kmp.screen.ScreenSelectScreen
-import io.openems.kmp.screenselect.screenSelectNav
+import io.openems.kmp.data.websocket.di.websocketModule
+import io.openems.kmp.navigation.UserScreen
+import io.openems.kmp.overview.di.overviewNav
+import io.openems.kmp.user.di.userNav
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.core.module.Module
 
@@ -31,14 +25,15 @@ fun App() {
 
         val navController = rememberNavController()
 
-        NavHost(navController = navController, startDestination = ScreenSelectScreen) {
-            screenSelectNav(navController)
-            demoNav()
-            authenticateNav()
+        NavHost(navController = navController, startDestination = UserScreen.Authentication) {
+            userNav(navController)
+            overviewNav(navController)
         }
 
     }
 }
+
+// val LocalNavController = compositionLocalOf<NavController?> { null }
 
 @Composable
 fun colorScheme(): ColorScheme {
@@ -53,5 +48,6 @@ fun colorScheme(): ColorScheme {
 }
 
 fun coreModules(): List<Module> = listOf(
-
+    websocketModule(),
 )
+

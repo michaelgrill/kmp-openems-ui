@@ -13,10 +13,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        startKoin {
-            modules(coreModules())
-        }
-
         setContent {
             App()
         }
